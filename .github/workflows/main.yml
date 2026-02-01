@@ -45,19 +45,8 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -out=tfplan
-
-      - name: Debug Secret Presence
-        run: |
-          if [ -z "${{ secrets.new_relic_api_key }}" ]; then
-            echo "::error::Secret NEW_RELIC_API_KEY is NOT set or is empty."
-            exit 1
-          else
-            echo "Secret NEW_RELIC_API_KEY is set."
-          fi
+        run: terraform plan -out=tfplan -var="newrelic_license_key=${{ secrets.new_relic_api_key }}"
 
       - name: Terraform Apply
         id: apply
-        env:
-          TF_VAR_newrelic_license_key: ${{ secrets.new_relic_api_key }}
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve -var="newrelic_license_key=${{ secrets.new_relic_api_key }}" tfplan

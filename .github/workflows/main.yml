@@ -1,47 +1,52 @@
-name: "Terraform EKS"
+name: 'Deploy to Main'
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - develop
-      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: terraform-state-lock
+  cancel-in-progress: false
 
 jobs:
-  terraform:
-    name: "Terraform"
+  deploy:
+    name: 'Deploy Infrastructure'
     runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
 
-      - name: "Configure AWS Credentials"
-        uses: aws-actions/configure-aws-credentials@v1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: GitHubActions
           aws-region: us-east-1
+          audience: sts.amazonaws.com
 
-      - name: "Setup Terraform"
-        uses: hashicorp/setup-terraform@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.5.0"
+          terraform_version: 1.8.5
 
-      - name: "Terraform Init"
+      - name: Terraform Init
         id: init
         run: terraform init
 
-      - name: "Terraform Validate"
-        id: validate
-        run: terraform validate -no-color
-
-      - name: "Terraform Plan"
+      - name: Terraform Plan
         id: plan
-        if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
+        run: terraform plan -out=tfplan
 
-      - name: "Terraform Apply"
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve tfplan

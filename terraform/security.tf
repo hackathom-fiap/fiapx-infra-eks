@@ -13,3 +13,13 @@ resource "aws_security_group_rule" "allow_postgres_egress" {
 
   security_group_id = module.eks.node_security_group_id
 }
+
+resource "aws_security_group_rule" "allow_redis_egress" {
+  description       = "Allow EKS nodes to connect to Redis ElastiCache."
+  type              = "egress"
+  from_port         = 6379
+  to_port           = 6379
+  protocol          = "tcp"
+  cidr_blocks       = [data.aws_vpc.existing.cidr_block] # Allow to any IP within the VPC
+  security_group_id = module.eks.node_security_group_id
+}

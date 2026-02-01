@@ -49,4 +49,6 @@ jobs:
 
       - name: Terraform Apply
         id: apply
+        env:
+          TF_VAR_newrelic_license_key: ${{ secrets.new_relic_api_key }}
         run: terraform apply -auto-approve tfplan

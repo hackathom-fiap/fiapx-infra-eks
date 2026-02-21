@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "meu-eks-terraform-state"       # Substitua pelo nome do seu bucket S3
-    key            = "soat-tech-challenge/eks.tfstate" # Caminho do arquivo de estado dentro do bucket
+    key            = "soat-tech-challenge/hackathon-eks.tfstate" # Caminho do arquivo de estado dentro do bucket
     region         = "us-east-1"                       # Região do seu bucket S3
     dynamodb_table = "meu-eks-terraform-lock-001"           # Substitua pelo nome da sua tabela do DynamoDB para lock
     encrypt        = true

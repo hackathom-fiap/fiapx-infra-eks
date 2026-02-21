@@ -43,3 +43,13 @@ output "node_security_group_id" {
   description = "O ID do security group dos nós do EKS."
   value       = module.eks.node_security_group_id
 }
+
+output "oidc_provider_arn" {
+  description = "O ARN do provedor OIDC do cluster EKS."
+  value       = module.eks.oidc_provider_arn
+}
+
+output "oidc_provider_url" {
+  description = "A URL do provedor OIDC do cluster EKS."
+  value       = module.eks.oidc_provider_url
+}

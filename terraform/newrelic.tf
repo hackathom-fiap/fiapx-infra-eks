@@ -31,6 +31,10 @@ resource "helm_release" "newrelic" {
     {
       name  = "kube-state-metrics.enabled"
       value = "true"
+    },
+    {
+      name  = "newrelic-logging.enabled"
+      value = "true"
     }
   ]
 }

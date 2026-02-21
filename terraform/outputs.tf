@@ -51,5 +51,5 @@ output "oidc_provider_arn" {
 
 output "oidc_provider_url" {
   description = "A URL do provedor OIDC do cluster EKS."
-  value       = module.eks.oidc_provider_url
+  value       = module.eks.cluster_oidc_issuer_url
 }

@@ -41,6 +41,20 @@ O sistema foi concebido como uma plataforma de Processamento Distribuido de Vide
 | **Video API** | `GET` | `/api/videos/status` | Lista o status de todos os videos do usuario logado. |
 | **Video API** | `POST` | `/api/videos/{id}/status` | Endpoint interno para atualizacao de status (usado pelo Worker). |
 
+## Repositorios do Hackathon
+
+### Infraestrutura
+*   [Infra EKS (Kubernetes)](https://github.com/hackathom-fiap/fiapx-infra-eks)
+*   [Infra Fila (AmazonMQ)](https://github.com/hackathom-fiap/fiapx-infra-amazonmq)
+*   [Infra Database (PostgreSQL)](https://github.com/hackathom-fiap/fiapx-infra-postgres)
+*   [Infra Redis](https://github.com/hackathom-fiap/fiapx-infra-redis)
+*   [Infra IAM Roles](https://github.com/hackathom-fiap/fiapx-infra-roles)
+
+### Microserviços (APIs)
+*   [App Auth](https://github.com/hackathom-fiap/fiapx-app-auth)
+*   [App Api](https://github.com/hackathom-fiap/fiapx-app-api)
+*   [App Worker](https://github.com/hackathom-fiap/fiapx-app-worker)
+
 ---
 
 ### Diagrama de Arquitetura
@@ -117,4 +131,22 @@ graph TD
 1.  **Escalabilidade Horizontal:** O Worker Processor pode ser escalado independentemente da API (usando K8s HPA) conforme a fila do RabbitMQ cresce.
 2.  **Arquitetura Hexagonal:** O uso de Ports and Adapters na Video API permite trocar o banco de dados ou o provider de nuvem com minimo impacto.
 3.  **Seguranca Stateless:** Toda a comunicacao e protegida por JWT, eliminando a necessidade de manter estado de sessao no servidor da API.
-4.  **Resiliencia:** Se o Worker falhar, a mensagem volta para a fila, garantindo que nenhum video deixe de ser processado.
+4. Resiliencia: Se o Worker falhar, a mensagem volta para a fila, garantindo que nenhum video deixe de ser processado.
+
+---
+
+## Repositorios do Projeto
+
+### Infraestrutura
+*   [Infra EKS (Kubernetes)](https://github.com/hackathom-fiap/fiapx-infra-eks)
+*   [Infra Database (PostgreSQL)](https://github.com/hackathom-fiap/fiapx-infra-postgres)
+*   [Infra Messaging (Amazon MQ/RabbitMQ)](https://github.com/hackathom-fiap/fiapx-infra-amazonmq)
+*   [Infra Gateway](https://github.com/hackathom-fiap/fiapx-infra-gtw)
+*   [Infra Redis](https://github.com/hackathom-fiap/fiapx-infra-redis)
+*   [Infra IAM Roles](https://github.com/hackathom-fiap/fiapx-infra-roles)
+
+### Microsservicos (APIs)
+*   [App Auth (Seguranca)](https://github.com/hackathom-fiap/fiapx-app-auth)
+*   [App Video API (Core)](https://github.com/hackathom-fiap/fiapx-app-api)
+*   [App Worker Processor](https://github.com/hackathom-fiap/fiapx-app-worker)
+

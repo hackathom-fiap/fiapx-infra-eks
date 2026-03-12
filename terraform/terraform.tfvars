@@ -5,6 +5,7 @@ aws_region   = "us-east-1"
 cluster_name = "hackathon-fiapx"
 cluster_version = "1.33"
 
+
 # ===============================================================
 # Configurações de Rede (Valores que você já forneceu)
 # ===============================================================

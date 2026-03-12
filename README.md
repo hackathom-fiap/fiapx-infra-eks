@@ -69,7 +69,11 @@ graph TD
 
         subgraph Storage [Camada de Persistência]
             S3[(🪣 Amazon S3)]:::aws
-            DB[(🐘 PostgreSQL)]:::db
+            subgraph RDS [Amazon RDS - PostgreSQL]
+                DB_A[(🔐 auth_db)]:::db
+                DB_API[(📹 api-db)]:::db
+                DB_W[(⚙️ worker-db)]:::db
+            end
             Redis[(🔴 Redis)]:::db
         end
 
@@ -84,13 +88,14 @@ graph TD
     Gateway --> API
 
     Auth -->|Valida Token| Redis
+    Auth -->|Valida/Cria Usuário| DB_A
     API -->|2. Salva Vídeo Bruto| S3
-    API -->|3. Registra Metadados| DB
+    API -->|3. Registra Metadados| DB_API
     API -->|4. Notifica Upload| MQ
 
     MQ -->|5. Consome Evento| Worker
     Worker -->|6. Processa Vídeo| S3
-    Worker -->|7. Atualiza Status| DB
+    Worker -->|7. Atualiza Status| DB_W
 ```
 
 ---

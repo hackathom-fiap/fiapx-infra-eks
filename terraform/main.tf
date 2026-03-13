@@ -10,6 +10,9 @@ module "eks" {
 
   cluster_endpoint_public_access = true
 
+  enable_cluster_creator_admin_permissions = true
+  authentication_mode                         = "API_AND_CONFIG_MAP"
+
   cluster_addons = {
     metrics-server = {
       most_recent = true

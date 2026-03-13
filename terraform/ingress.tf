@@ -12,7 +12,9 @@ resource "helm_release" "nginx_ingress_controller" {
   create_namespace = true
   version    = "4.10.0" # Versão estável e recente
 
-  depends_on = [module.eks.access_policy_associations]
+  depends_on = [
+    module.eks.access_policy_associations
+  ]
 
   values = [
     <<-EOT

@@ -9,6 +9,8 @@ resource "helm_release" "newrelic" {
   create_namespace = true
   version          = "5.0.38" # Versão fixada para garantir estabilidade
 
+  depends_on = [module.eks.access_policy_associations]
+
   set = [
     {
       name  = "global.licenseKey"

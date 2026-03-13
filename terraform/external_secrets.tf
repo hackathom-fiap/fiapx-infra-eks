@@ -78,8 +78,6 @@ resource "helm_release" "external_secrets" {
   create_namespace = true
   version    = "0.20.1" # Versão mais recente para suportar a API v1
 
-  # Garante que o papel do IAM e as permissões de acesso ao cluster
-  # existam antes de tentar instalar o chart.
   depends_on = [
     aws_iam_role.external_secrets,
     module.eks.access_policy_associations

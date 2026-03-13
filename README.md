@@ -10,12 +10,6 @@
 
 *   [Apresentação do Hackathon](https://youtu.be/mbDetKJVOo4)
 
-## SonarQube
-
-*   [SonarQube](https://sonarcloud.io/projects?sort=name)
-*   Cobertura de Testes:
-![Cobertura de Testes](Cobertura-Sonar.png)
-
 ## Arquitetura do Sistema
 
 O sistema foi concebido como uma plataforma de Processamento Distribuido de Videos, utilizando uma arquitetura orientada a eventos (Event-Driven) para garantir escalabilidade e resiliencia. A solucao roda em um cluster Amazon EKS (Kubernetes) e utiliza servicos gerenciados da AWS para persistencia e mensageria.
@@ -49,6 +43,12 @@ O sistema foi concebido como uma plataforma de Processamento Distribuido de Vide
 | **Video API** | `POST` | `/api/videos/upload` | Recebe um ou mais videos para processamento. |
 | **Video API** | `GET` | `/api/videos/status` | Lista o status de todos os videos do usuario logado. |
 | **Video API** | `POST` | `/api/videos/{id}/status` | Endpoint interno para atualizacao de status (usado pelo Worker). |
+
+## SonarQube
+
+*   [SonarQube](https://sonarcloud.io/projects?sort=name)
+*   Cobertura de Testes:
+![Cobertura de Testes](Cobertura-Sonar.png)
 
 ## Repositorios do Hackathon
 

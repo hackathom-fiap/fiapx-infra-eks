@@ -35,7 +35,6 @@ nlb_hostname = ""
 
 #newrelic
 
-enable_newrelic      = true
 
 
 

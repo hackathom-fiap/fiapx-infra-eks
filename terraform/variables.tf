@@ -65,10 +65,3 @@ variable "enable_newrelic" {
   type        = bool
   default     = false
 }
-
-variable "newrelic_license_key" {
-  description = "A chave de licença do New Relic para enviar dados de monitoramento. Obrigatório se enable_newrelic for true."
-  type        = string
-  sensitive   = true
-  default     = ""
-}

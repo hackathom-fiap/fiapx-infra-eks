@@ -10,6 +10,10 @@
 
 *   [Apresentação do Hackathon](https://youtu.be/mbDetKJVOo4)
 
+## SonarQube
+
+*   [SonarQube](https://sonarcloud.io/projects?sort=name)
+*   [Print](Cobertura-Sonar.png)
 
 ## Arquitetura do Sistema
 

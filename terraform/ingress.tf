@@ -12,7 +12,13 @@ resource "helm_release" "nginx_ingress_controller" {
   create_namespace = true
   version    = "4.10.0" # Versão estável e recente
 
+  # Tenta forçar a atualização se houver resquícios
+  force_update    = true
+  recreate_pods   = true
+  cleanup_on_fail = true
+
   depends_on = [
+    time_sleep.wait_for_kubernetes,
     module.eks.access_policy_associations
   ]
 

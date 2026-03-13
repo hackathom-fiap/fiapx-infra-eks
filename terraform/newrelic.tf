@@ -2,8 +2,6 @@
 resource "helm_release" "newrelic" {
   count = var.enable_newrelic ? 1 : 0
 
-  provider = helm.eks_cluster
-
   name             = "newrelic-bundle"
   repository       = "https://helm-charts.newrelic.com"
   chart            = "nri-bundle"

@@ -5,7 +5,6 @@
 # para todos os serviços dentro do cluster.
 #==============================================================================
 resource "helm_release" "nginx_ingress_controller" {
-  provider   = helm.eks_cluster
   name       = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
@@ -33,7 +32,6 @@ EOT
 # Isso nos permite obter o endereço do NLB para usar em outros lugares (como no VPC Link).
 #==============================================================================
 data "kubernetes_service" "nginx_ingress_service" {
-  provider = kubernetes.eks_cluster
   # Garante que a leitura só aconteça depois que o Helm terminar a instalação
   depends_on = [helm_release.nginx_ingress_controller]
 

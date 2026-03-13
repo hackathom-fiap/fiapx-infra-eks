@@ -2,9 +2,7 @@ provider "aws" {
   region = var.aws_region
 }
 
-data "aws_eks_cluster_auth" "this" {
-  name = module.eks.cluster_name
-}
+# O data "aws_eks_cluster_auth" "this" já está no main.tf, por isso foi removido daqui.
 
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint

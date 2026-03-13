@@ -13,7 +13,8 @@
 ## SonarQube
 
 *   [SonarQube](https://sonarcloud.io/projects?sort=name)
-*   [Print](Cobertura-Sonar.png)
+*   Cobertura de Testes:
+![Cobertura de Testes](Cobertura-Sonar.png)
 
 ## Arquitetura do Sistema
 

@@ -59,9 +59,3 @@ variable "nlb_hostname" {
   type        = string
   default     = ""
 }
-
-variable "enable_newrelic" {
-  description = "Se true, instala o New Relic no cluster EKS."
-  type        = bool
-  default     = false
-}

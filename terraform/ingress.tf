@@ -18,7 +18,6 @@ resource "helm_release" "nginx_ingress_controller" {
   cleanup_on_fail = true
 
   depends_on = [
-    time_sleep.wait_for_kubernetes,
     module.eks.access_policy_associations
   ]
 

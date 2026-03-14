@@ -30,9 +30,4 @@ module "eks" {
       desired_size = var.node_desired_capacity
     }
   }
-  }
-
-  resource "time_sleep" "wait_for_kubernetes" {
-  depends_on = [module.eks]
-  create_duration = "60s"
-  }
+}

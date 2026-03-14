@@ -2,26 +2,25 @@ provider "aws" {
   region = var.aws_region
 }
 
-# Pegamos os dados do cluster assim que ele fica ativo
-data "aws_eks_cluster" "cluster" {
+# Pegamos os dados do cluster diretamente da AWS para garantir que o endpoint e token sejam válidos
+data "aws_eks_cluster" "this" {
   name = module.eks.cluster_name
 }
 
-# Geramos um token de autenticação novo e dinâmico
-data "aws_eks_cluster_auth" "cluster" {
+data "aws_eks_cluster_auth" "this" {
   name = module.eks.cluster_name
 }
 
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.cluster.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.cluster.token
+  host                   = data.aws_eks_cluster.this.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.this.token
 }
 
 provider "helm" {
-  kubernetes = {
-    host                   = data.aws_eks_cluster.cluster.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.cluster.token
+  kubernetes {
+    host                   = data.aws_eks_cluster.this.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.this.token
   }
 }

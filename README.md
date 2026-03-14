@@ -8,7 +8,7 @@
 ---
 ## Video da apresentação do Hackathon
 
-*   [Apresentação do Hackathon](https://youtu.be/mbDetKJVOo4)
+*   [Apresentação do Hackathon](https://youtu.be/1c8XJC5AvFo)
 
 ## Arquitetura do Sistema
 
